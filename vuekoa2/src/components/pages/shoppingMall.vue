@@ -11,6 +11,14 @@
         </van-col>
       </van-row>
     </div>
+    <div class="swiper-area">
+      <van-swipe :autoplay='3000'>
+        <van-swipe-item v-for="(image,index) in  bannerPicArray" :key='index'>
+          <img :src='image.imageUrl' width="100%">
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    
   </div>
 </template>
 <script>
@@ -18,7 +26,11 @@ export default {
   name:'ShoppingMall',
   data(){
       return{
-          msg:'Shopping Mall'
+         bannerPicArray:[
+           {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'},
+           {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'},
+            {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'},
+         ]
       }
   }
 }
@@ -48,7 +60,10 @@ export default {
       font-family: Arial, Helvetica, sans-serif
   .search-btn
     text-align center        
-
+.swiper-area
+  clear both
+  width:20rem
+  overflow hidden
 
 </style>
 
