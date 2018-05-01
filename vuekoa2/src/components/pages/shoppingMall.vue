@@ -14,24 +14,51 @@
     <div class="swiper-area">
       <van-swipe :autoplay='3000'>
         <van-swipe-item v-for="(image,index) in  bannerPicArray" :key='index'>
-          <img :src='image.imageUrl' width="100%">
+          <img :src='image.image' width="100%">
         </van-swipe-item>
       </van-swipe>
     </div>
-    
+    <div class="type-bar">
+      <div v-for='(cate,index) in category' :key='index'>
+        <img :src="cate.image" alt="" width="90%">
+        <span>{{cate.mallCategoryName}}</span>
+      </div>
+    </div>
+    <!-- ad banner area -->
+    <div class='ad-banner'>
+      <img :src="adBanner.PICTURE_ADDRESS" alt="">
+    </div>
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name:'ShoppingMall',
   data(){
       return{
          bannerPicArray:[
-           {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'},
-           {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'},
-            {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'},
-         ]
+          //  {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'},
+          //  {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'},
+          //   {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'},
+         ],
+        category:[],
+        adBanner:'',
       }
+  },
+  created(){
+    axios({
+      url:'https://easy-mock.com/mock/5ae7c0c7b1bff34114d6f4c5/mock/vue-loa2/smilevue',
+      method:'get'
+    }).then((Response)=>{
+      console.dir(Response.data)
+      if(Response.status==200){
+        this.category=Response.data.data.category;
+        this.adBanner=Response.data.data.advertesPicture;
+        this. bannerPicArray=Response.data.data.slides;
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
   }
 }
 </script>
@@ -64,7 +91,21 @@ export default {
   clear both
   width:20rem
   overflow hidden
-
+.type-bar
+  background #ffffff
+  margin 0 .3rem .3rem .3rem
+  border-radius 0.3rem
+  font-size 14px
+  display flex
+  flex-direction row
+  flex-wrap nowrap
+  div
+    padding .3rem
+    font-size 12px
+    text-align center
+.ad-banner
+  img 
+    width 100%
 </style>
 
 
