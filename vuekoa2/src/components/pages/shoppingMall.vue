@@ -28,6 +28,21 @@
     <div class='ad-banner'>
       <img :src="adBanner.PICTURE_ADDRESS" alt="">
     </div>
+    <!-- 商品推荐区域 -->
+    <div class="recommend-area">
+      <div class="recommend-title">商品推荐</div>
+      <div class="recommend-body">
+        <swiper >
+          <swiper-slide v-for="(item,index) in recommendGoods" :key='index'>
+            <div class="recommend-item">
+              <img :src="item.image" alt="" width='80%'>
+              <div>{{item.goodsName}}</div>
+              <div>￥{{item.price}} (￥{{item.mallPrice}})</div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div> 
+    </div>
   </div>
 </template>
 <script>
@@ -43,6 +58,7 @@ export default {
          ],
         category:[],
         adBanner:'',
+        recommendGoods:[]
       }
   },
   created(){
@@ -54,7 +70,8 @@ export default {
       if(Response.status==200){
         this.category=Response.data.data.category;
         this.adBanner=Response.data.data.advertesPicture;
-        this. bannerPicArray=Response.data.data.slides;
+        this.bannerPicArray=Response.data.data.slides;
+        this.recommendGoods=Response.data.data.recommend
       }
     }).catch((error)=>{
       console.log(error)
@@ -75,7 +92,7 @@ export default {
   .input
     .search-input 
       width:100%;
-      height: 1.3rem;
+      height: 1.5rem;
       border-top:0px;
       border-left:0px;
       border-right:0px;
@@ -106,6 +123,21 @@ export default {
 .ad-banner
   img 
     width 100%
+.recommend-area
+  background-color #fff
+  margin-top .3rem   
+  .recommend-title
+    border-bottom 1px solid #eeeeee
+    font-size 14px
+    padding 0.2rem
+    color #e5017d
+  .recommend-body
+    .recommend-item
+      width 100%
+      border-right 1px solid #eeeeee
+      font-size 12px 
+      font-weight 700
+      text-align center
 </style>
 
 
