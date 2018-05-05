@@ -32,7 +32,7 @@
     <div class="recommend-area">
       <div class="recommend-title">商品推荐</div>
       <div class="recommend-body">
-        <swiper >
+        <!-- <swiper >
           <swiper-slide v-for="(item,index) in recommendGoods" :key='index'>
             <div class="recommend-item">
               <img :src="item.image" alt="" width='80%'>
@@ -40,15 +40,20 @@
               <div>￥{{item.price}} (￥{{item.mallPrice}})</div>
             </div>
           </swiper-slide>
-        </swiper>
+        </swiper> -->
+        <swiperDefault :recommendGoods='recommendGoods'></swiperDefault>
       </div> 
     </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
+import swiperDefault from '@/components/swiper/swiperDefault.vue'
 export default {
   name:'ShoppingMall',
+  components:{
+  swiperDefault
+  },
   data(){
       return{
          bannerPicArray:[
