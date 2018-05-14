@@ -44,15 +44,21 @@
         <swiperDefault :recommendGoods='recommendGoods'></swiperDefault>
       </div> 
     </div>
+    <!-- 楼层 区域 -->
+    <floorComponent :floorData='floor1' :floorTitle='floorName.floor1'></floorComponent>
+    <floorComponent :floorData='floor2' :floorTitle='floorName.floor2'></floorComponent>
+    <floorComponent :floorData='floor3' :floorTitle='floorName.floor3'></floorComponent>
   </div>
 </template>
 <script>
 import axios from 'axios'
 import swiperDefault from '@/components/swiper/swiperDefault.vue'
+import floorComponent from '@/components/pages/floorComponent.vue'
 export default {
   name:'ShoppingMall',
   components:{
-  swiperDefault
+  swiperDefault,
+  floorComponent
   },
   data(){
       return{
@@ -63,7 +69,14 @@ export default {
          ],
         category:[],
         adBanner:'',
-        recommendGoods:[]
+        recommendGoods:[],
+        // floor1_0:{},
+        // floor1_1:{},
+        // floor1_2:{},
+        floor1:[],
+        floor2:[],
+        floor3:[],
+        floorName:{},
       }
   },
   created(){
@@ -76,7 +89,11 @@ export default {
         this.category=Response.data.data.category;
         this.adBanner=Response.data.data.advertesPicture;
         this.bannerPicArray=Response.data.data.slides;
-        this.recommendGoods=Response.data.data.recommend
+        this.recommendGoods=Response.data.data.recommend;
+        this.floor1=Response.data.data.floor1;
+        this.floor2=Response.data.data.floor2;
+        this.floor3=Response.data.data.floor3;
+        this.floorName=Response.data.data.floorName;
       }
     }).catch((error)=>{
       console.log(error)
