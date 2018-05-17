@@ -48,17 +48,34 @@
     <floorComponent :floorData='floor1' :floorTitle='floorName.floor1'></floorComponent>
     <floorComponent :floorData='floor2' :floorTitle='floorName.floor2'></floorComponent>
     <floorComponent :floorData='floor3' :floorTitle='floorName.floor3'></floorComponent>
+    <!-- 热门商品区域 hot area -->
+    <div class="hot-area"> 
+      <div class='hot-title'>热卖商品</div>
+      <div class="hot-goods"> 
+        <!-- list -->
+        <van-list>
+          <van-row gutter='20'>
+            <van-col span='12' v-for='(item,index) in hotGoods' :key='index' >
+              <goodsInfo :goodsImage='item.image' :goodsName='item.name' :goodsPrice="item.price"></goodsInfo>
+            </van-col>
+          </van-row>
+        </van-list>
+      </div> 
+    </div> 
+
   </div>
 </template>
 <script>
 import axios from 'axios'
 import swiperDefault from '@/components/swiper/swiperDefault.vue'
 import floorComponent from '@/components/pages/floorComponent.vue'
+import goodsInfo from '@/components/pages/goodsInfo.vue'
 export default {
   name:'ShoppingMall',
   components:{
   swiperDefault,
-  floorComponent
+  floorComponent,
+  goodsInfo
   },
   data(){
       return{
@@ -77,6 +94,7 @@ export default {
         floor2:[],
         floor3:[],
         floorName:{},
+        hotGoods:[],
       }
   },
   created(){
@@ -94,6 +112,8 @@ export default {
         this.floor2=Response.data.data.floor2;
         this.floor3=Response.data.data.floor3;
         this.floorName=Response.data.data.floorName;
+        this.hotGoods=Response.data.data.hotGoods;
+
       }
     }).catch((error)=>{
       console.log(error)
@@ -160,6 +180,11 @@ export default {
       font-size 12px 
       font-weight 700
       text-align center
+.hot-area
+  text-align center
+  font-size 14px
+  height 1.8rem
+  line-height 1.8rem      
 </style>
 
 
